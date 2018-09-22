@@ -38,21 +38,21 @@ namespace LINQ_Practice
         [TestMethod]
         public void GetOnlyCohortWithThreeJuniorInstructors()
         {
-            var ActualCohort = PracticeData/*FILL IN LINQ EXPRESSION*/;
+            var ActualCohort = PracticeData.Single(cohort => cohort.JuniorInstructors.Count == 3)/*FILL IN LINQ EXPRESSION*/;
             Assert.AreEqual(ActualCohort, CohortBuilder.Cohort3);
         }
 
         [TestMethod]
         public void GetOnlyCohortThatIsFullTimeAndPrimaryInstructorBirthdayInTheFuture()
         {
-            var ActualCohort = PracticeData/*FILL IN LINQ EXPRESSION*/;
+            var ActualCohort = PracticeData.Single(cohort => cohort.FullTime && cohort.PrimaryInstructor.Birthday > DateTime.Now)/*FILL IN LINQ EXPRESSION*/;
             Assert.AreEqual(ActualCohort, CohortBuilder.Cohort2);
         }
 
         [TestMethod]
         public void GetOnlyCohortWithInstructorNamedZeldaOrNull()
         {
-            var ActualCohort = PracticeData/*FILL IN LINQ EXPRESSION*/;
+            var ActualCohort = PracticeData.SingleOrDefault(cohort => cohort.PrimaryInstructor.FirstName == "Zelda")/*FILL IN LINQ EXPRESSION*/;
             Assert.IsNull(ActualCohort);
         }
 
@@ -60,14 +60,14 @@ namespace LINQ_Practice
         [ExpectedException(typeof(System.InvalidOperationException))]
         public void GetOnlyCohortThatIsBothNotActiveAndNotFullTimeOrThrowException()
         {
-            var shouldThrowException = PracticeData/*FILL IN LINQ EXPRESSION*/;
+            var shouldThrowException = PracticeData.Single(cohort => !cohort.Active && !cohort.FullTime)/*FILL IN LINQ EXPRESSION*/;
         }
 
         [TestMethod]
         [ExpectedException(typeof(System.InvalidOperationException))]
         public void GetOnlyCohortWith2JuniorInstructorsOrThrowException()
         {
-            var shouldThrowException = PracticeData/*FILL IN LINQ EXPRESSION*/;
+            var shouldThrowException = PracticeData.Single(cohort => cohort.JuniorInstructors.Count == 2)/*FILL IN LINQ EXPRESSION*/;
         }
     }
 }
